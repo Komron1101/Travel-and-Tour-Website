@@ -112,7 +112,7 @@
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.home .homeContent .cardDiv .input .input[type=range] {
+.home .homeContent .cardDiv .input input[type=range] {
   background-color: red;
 }
 .home .homeContent .cardDiv .searchOptions {
@@ -145,8 +145,9 @@
 }
 .home .homeContent .homeFooterIcons .icon {
   font-size: 20px;
-  margin: 0 5 px;
+  margin: 0 5px;
   color: var(--whiteColor);
+  font-weight: 600;
 }
 .home .homeContent .homeFooterIcons .icon:hover {
   color: var(--PrimaryColor);

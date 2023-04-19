@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './home.css';
 import video from '../../Assets/videoMain.mp4';
 import { GrLocation } from 'react-icons/gr';
@@ -9,7 +9,20 @@ import { SiTripadvisor } from 'react-icons/si';
 import { BsListTask } from 'react-icons/bs';
 import { TbApps } from 'react-icons/tb';
 
+// import Aos for animation
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+
 const Home = () => {
+  // Create a react hook to add a scroll animation......
+
+  useEffect(()=>{
+    Aos.init({duration: 2000})
+  }, [])
+
+
+
   return (
     <section className='home'>
       <div className="overlay">
@@ -68,7 +81,7 @@ const Home = () => {
             <SiTripadvisor className='icon' />
           </div>
 
-          <div className="rightIcons">
+          <div className="rightIcons flex">
             <BsListTask className='icon' />
             <TbApps className='icon' />
           </div>

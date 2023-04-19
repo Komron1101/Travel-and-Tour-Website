@@ -149,6 +149,10 @@ const Footer = () => {
               </li>
             </div>
 
+            <div className="footerDiv flex">
+              <small>TRAVEL AND TOUR WEBSITE THEME</small>
+              <small>COPYRIGHT RESERVED - KOMRON1101</small>
+            </div>
           </div>
         </div>
       </div>

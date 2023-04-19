@@ -118,9 +118,8 @@
                     margin-left: 10px;
                 }
 
-                .input[type="range"] {
-                    // FIXME: range input don't work
-                    background-color: red;
+                input[type=range] {
+                    background-color: red; // FIXME: range input don't work
                 }
             }
 
@@ -157,8 +156,9 @@
 
             .icon {
                 font-size: 20px;
-                margin: 0 5 px;
+                margin: 0 5px;
                 color: var(--whiteColor);
+                font-weight: 600;
 
                 &:hover {
                     color: var(--PrimaryColor);
