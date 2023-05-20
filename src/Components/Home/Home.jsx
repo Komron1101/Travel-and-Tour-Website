@@ -15,20 +15,56 @@ import 'aos/dist/aos.css';
 
 
 const Home = () => {
-  // Create a react hook to add a scroll animation......
+  // Our const 
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [price, setPrice] = useState(3000);
+  
+  // For demonstration useEffect
+  const [outputDataTrigger, setOutputDataTrigger] = useState(true);
 
+  // Create a react hook to add a scroll animation......
   useEffect(() => {
     Aos.init({ duration: 2000 })
   }, [])
 
+  // For date.....
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    setDate(formattedDate);
+  }, [outputDataTrigger]);
 
-  // Create function for input-range
-  const [price, setPrice] = useState(3000);
 
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value); // TODO: create animation for input-range
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   }
 
+  const handleDataChange = (e) => {
+    setDate(e.target.value);
+  }
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+  }
+
+
+  const outputData = () => {
+    if (name === '' || date === '') {
+      return;
+    }
+
+    console.log('Name: ', name);
+    console.log('Date: ', date);
+    console.log('Price: ', price);
+
+    setName('');
+    setDate('');
+    setPrice(3000);
+
+    setOutputDataTrigger(prevTrigger => !prevTrigger);
+  }
 
   return (
     <section className='home'>
@@ -53,7 +89,12 @@ const Home = () => {
           <div className="destinationInput">
             <label htmlFor="city">Search your destination:</label>
             <div className="input flex">
-              <input type="text" placeholder='Enter name here....' />
+              <input
+                type="text"
+                placeholder='Enter name here....'
+                value={name}
+                onChange={handleNameChange}
+              />
               <GrLocation className='icon' />
             </div>
           </div>
@@ -61,7 +102,11 @@ const Home = () => {
           <div className="dateInput">
             <label htmlFor="date">Select your date:</label>
             <div className="input flex">
-              <input type="date" />
+              <input
+                type="date"
+                value={date}
+                onChange={handleDataChange}
+              />
             </div>
           </div>
 
@@ -70,13 +115,19 @@ const Home = () => {
               <label htmlFor="price">Max price:</label>
               <h3 className="total">${price}</h3>
             </div>
-
             <div className="input flex">
-              <input type="range" max='5000' min='1000' step='100' value={price} onChange={handlePriceChange} />
+              <input
+                type="range"
+                max='5000'
+                min='1000'
+                step='100'
+                value={price}
+                onChange={handlePriceChange}
+              />
             </div>
           </div>
 
-          <div className="searchOptions flex">
+          <div onClick={outputData} className="searchOptions flex">
             <HiFilter className="icon" />
             <span>MORE FILTERS</span>
           </div>

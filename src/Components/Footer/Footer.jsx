@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './footer.css';
 import videoFooter from '../../Assets/videoFooter.mp4';
 import { FiChevronRight, FiSend } from 'react-icons/fi';
@@ -20,6 +20,21 @@ const Footer = () => {
     Aos.init({ duration: 2000 })
   }, [])
 
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const outputEmail = () => {
+    if (email === '') {
+      return;
+    }
+
+    console.log('Email: ', email);
+
+    setEmail('');
+  }
 
   return (
     <section className='footer'>
@@ -35,8 +50,14 @@ const Footer = () => {
           </div>
 
           <div className="inputDiv flex">
-            <input data-aos="fade-up" type="text" placeholder='Enter Email Address' />
-            <button data-aos="fade-up" className="btn flex" type='submit'>
+            <input
+              data-aos="fade-up"
+              type="text"
+              placeholder='Enter Email Address'
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <button onClick={outputEmail} data-aos="fade-up" className="btn flex" type='submit'>
               SEND <FiSend className='icon' />
             </button>
           </div>
