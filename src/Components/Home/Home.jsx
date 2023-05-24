@@ -15,55 +15,42 @@ import 'aos/dist/aos.css';
 
 
 const Home = () => {
-  // Our const 
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [price, setPrice] = useState(3000);
-  
-  // For demonstration useEffect
-  const [outputDataTrigger, setOutputDataTrigger] = useState(true);
+  const [userInput, setUserInput] = useState({
+    name: '',
+    date: new Date(),
+    price: 3000
+  })
+
 
   // Create a react hook to add a scroll animation......
   useEffect(() => {
     Aos.init({ duration: 2000 })
   }, [])
 
-  // For date.....
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
-    setDate(formattedDate);
-  }, [outputDataTrigger]);
 
-
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  const handleChange = (e) => {
+    setUserInput({
+      ...userInput,
+      [e.target.name]: e.target.value,
+    });
   }
 
-  const handleDataChange = (e) => {
-    setDate(e.target.value);
-  }
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
-  }
 
 
   const outputData = () => {
-    if (name === '' || date === '') {
+    if (userInput.name === '' || userInput.date === '') {
       return;
     }
 
-    console.log('Name: ', name);
-    console.log('Date: ', date);
-    console.log('Price: ', price);
+    console.log('result: >>>>>>>>>>', userInput);
 
-    setName('');
-    setDate('');
-    setPrice(3000);
+    // reset the value
+    setUserInput({
+      name: '',
+      date: '',
+      price: 3000,
+    })
 
-    setOutputDataTrigger(prevTrigger => !prevTrigger);
   }
 
   return (
@@ -92,8 +79,9 @@ const Home = () => {
               <input
                 type="text"
                 placeholder='Enter name here....'
-                value={name}
-                onChange={handleNameChange}
+                value={userInput.name}
+                name='name'
+                onChange={handleChange}
               />
               <GrLocation className='icon' />
             </div>
@@ -104,8 +92,9 @@ const Home = () => {
             <div className="input flex">
               <input
                 type="date"
-                value={date}
-                onChange={handleDataChange}
+                value={userInput.date}
+                name='date'
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -113,7 +102,7 @@ const Home = () => {
           <div className="priceInput">
             <div className="label_total flex">
               <label htmlFor="price">Max price:</label>
-              <h3 className="total">${price}</h3>
+              <h3 className="total">${userInput.price}</h3>
             </div>
             <div className="input flex">
               <input
@@ -121,8 +110,9 @@ const Home = () => {
                 max='5000'
                 min='1000'
                 step='100'
-                value={price}
-                onChange={handlePriceChange}
+                value={userInput.price}
+                name='price'
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -150,5 +140,4 @@ const Home = () => {
     </section>
   )
 }
-
 export default Home;
